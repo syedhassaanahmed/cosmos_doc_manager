@@ -1,5 +1,5 @@
 # Overview
-Cosmos Graph Doc Manager takes MongoDB documents and makes them available in an Azure Cosmos DB graph structure, following the format specified by [Mongo Connector](https://github.com/10gen-labs/mongo-connector). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way synchronization. 
+Cosmos Graph Doc Manager takes MongoDB documents and makes them available in an Azure Cosmos DB Graph structure, following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way synchronization. 
 
 **This project is currently a work-in-progress!!!**
 
