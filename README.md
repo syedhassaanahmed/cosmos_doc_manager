@@ -3,8 +3,8 @@ Cosmos Graph Doc Manager takes MongoDB documents and makes them available in an 
 
 **This project is currently a work-in-progress!!!**
 
-# Note
-The software in this repository is provided AS IS, with no guarantees of any kind.
+# Disclaimer
+The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is not associated with `Microsoft`.
 
 # Prerequisites
 - You must have `Python` installed in order to use this project. `Python 3` is recommended.
