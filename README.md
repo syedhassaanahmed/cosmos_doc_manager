@@ -7,9 +7,9 @@ Cosmos Graph Doc Manager takes MongoDB documents and makes them available in an 
 The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is not associated with `Microsoft`.
 
 # Prerequisites
-- You must have `Python` installed in order to use this project. `Python 3` is recommended.
+- You must have `Python` installed. `Python 3` is recommended.
 - If you need a MongoDB IDE, install [Studio3T](https://studio3t.com/download/).
-- `Mongo Connector` requires a Mongo `Replica Set`. Install `Docker` if you'd like to do it locally.
+- `Mongo Connector` requires a Mongo `Replica Set`. Install `Docker` if you'd like a local `Replica Set`.
 - For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently doesn't support Graph API, however you'll still be able to see the internal `JSON` Document representation.
 
 ## Local Mongo Replica Set
