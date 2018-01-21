@@ -7,7 +7,7 @@ Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cos
 The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is **NOT associated with Microsoft**.
 
 # Prerequisites
-- You must have `Python` installed. `Python 3` is recommended.
+- You must have `Python 3` installed.
 - If you need a MongoDB IDE, install [Studio3T](https://studio3t.com/download/).
 - `Mongo Connector` requires a Mongo `Replica Set`. Install `Docker` if you'd like a local `Replica Set`.
 - For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently only supports SQL API, however you'll still be able to see the internal `JSON` Document representation of other APIs.
@@ -30,6 +30,7 @@ rs.reconfig(conf, {force:true});
 - Install Mongo Connector `pip install mongo-connector`
 - Clone this repo `git clone https://github.com/syedhassaanahmed/cosmos_doc_manager.git`
 - Let Mongo Connector locate our Doc Manager `cd cosmos_doc_manager && export PYTHONPATH=.`
+- Disable `HTTPS` Certificate warning `export PYTHONWARNINGS="ignore:Unverified HTTPS request"`
 
 # Run locally
 `mongo-connector -m localhost:27017 -t https://localhost:8081 -d cosmos_doc_manager`

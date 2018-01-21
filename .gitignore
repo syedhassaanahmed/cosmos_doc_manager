@@ -102,6 +102,7 @@ ENV/
 
 # VSCode
 .vscode
+cosmos_doc_manager_hdi_settings.json
 
 # Mongo oplog
 *.timestamp
