@@ -1,6 +1,3 @@
-import os
-import sys
-
 try:
     from setuptools import setup, find_packages
     from setuptools.extension import Extension
@@ -13,8 +10,6 @@ except ImportError:
 
 extra_opts = {}
 
-python_2 = sys.version_info < (3,)
-
 try:
     with open("README.md", "r") as fd:
         extra_opts['long_description'] = fd.read()
@@ -23,14 +18,14 @@ except IOError:
 
 packages = ["mongo_connector", "mongo_connector.doc_managers"]
 package_metadata = {
-    "name": "cosmos-graph-doc-manager",
+    "name": "cosmos-doc-manager",
     "version": "0.0.1",
-    "description": "Cosmos DB Graph Doc Manager for Mongo Connector",
-    "long_description": "Cosmos DB Graph Doc Manager is a tool that will import data from MongoDB to " 
-                        "Cosmos DB Graph API, via Mongo-Connector.",
+    "description": "Azure Cosmos DB Doc Manager for Mongo Connector",
+    "long_description": "Cosmos Doc Manager is a tool that will import data from MongoDB to " 
+                        "Azure Cosmos DB, via Mongo-Connector.",
     "author": "Syed Hassaan Ahmed",
     "author_email": "hassaan.brix@gmail.com",
-    "url": "https://github.com/syedhassaanahmed/cosmos_graph_doc_manager.git",
+    "url": "https://github.com/syedhassaanahmed/cosmos_doc_manager.git",
     "entry_points": {
         "console_scripts": [
             'mongo-connector = mongo_connector.connector:main',

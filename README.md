@@ -1,16 +1,16 @@
 # Overview
-Cosmos Graph Doc Manager takes MongoDB documents and makes them available in an Azure Cosmos DB Graph structure, following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way synchronization. 
+Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cosmos DB following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way synchronization. Currently it supports Cosmos DB SQL and Graph API.
 
 **This project is currently a work-in-progress!!!**
 
 # Disclaimer
-The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is not associated with `Microsoft`.
+The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is **NOT associated with Microsoft**.
 
 # Prerequisites
 - You must have `Python` installed. `Python 3` is recommended.
 - If you need a MongoDB IDE, install [Studio3T](https://studio3t.com/download/).
 - `Mongo Connector` requires a Mongo `Replica Set`. Install `Docker` if you'd like a local `Replica Set`.
-- For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently doesn't support Graph API, however you'll still be able to see the internal `JSON` Document representation.
+- For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently only supports SQL API, however you'll still be able to see the internal `JSON` Document representation of other APIs.
 
 ## Local Mongo Replica Set
 Run this to spin up a volume-mounted, single-node Mongo `Replica Set`;
@@ -28,8 +28,8 @@ rs.reconfig(conf, {force:true});
 
 # Installation
 - Install Mongo Connector `pip install mongo-connector`
-- Clone this repo `git clone https://github.com/syedhassaanahmed/cosmos_graph_doc_manager.git`
-- Let Mongo Connector locate our Doc Manager `cd cosmos_graph_doc_manager && export PYTHONPATH=.`
+- Clone this repo `git clone https://github.com/syedhassaanahmed/cosmos_doc_manager.git`
+- Let Mongo Connector locate our Doc Manager `cd cosmos_doc_manager && export PYTHONPATH=.`
 
 # Run locally
-`mongo-connector -m localhost:27017 -t https://localhost:8081 -d cosmos_graph_doc_manager`
+`mongo-connector -m localhost:27017 -t https://localhost:8081 -d cosmos_doc_manager`
