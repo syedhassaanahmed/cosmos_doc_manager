@@ -104,5 +104,9 @@ ENV/
 .vscode
 cosmos_doc_manager_hdi_settings.json
 
-# Mongo oplog
+# PyCharm
+.idea
+
+# Mongo Connector
 *.timestamp
+config.json

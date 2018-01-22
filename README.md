@@ -33,4 +33,26 @@ rs.reconfig(conf, {force:true});
 - Disable `HTTPS` Certificate warning `export PYTHONWARNINGS="ignore:Unverified HTTPS request"`
 
 # Run locally
-`mongo-connector -m localhost:27017 -t https://localhost:8081 -d cosmos_doc_manager`
+`mongo-connector -c config.json`
+
+Mongo Connector's custom configuration is [specified here](https://github.com/mongodb-labs/mongo-connector/wiki/Configuration-Options). 
+
+Below JSON is an example config file to sync data in Graph format with Cosmos DB Emulator. Possible values for `apiType` are `SQL` (default) and `Graph`. `Graph` requires specifying `databaseId` and `collectionId`.
+
+```json
+{
+  "mainAddress": "localhost:27017",
+  "docManagers": [
+    {
+      "docManager": "cosmos_doc_manager",
+      "targetURL": "https://localhost:8081",
+      "args": {
+        "masterKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+        "apiType": "Graph",
+        "databaseId": "graphdb",
+        "collectionId": "graphcoll"
+      }
+    }
+  ]
+}
+```
