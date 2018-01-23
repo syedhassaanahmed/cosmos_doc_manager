@@ -9,7 +9,7 @@ The software in this repository is provided AS IS, with no guarantees of any kin
 # Prerequisites
 - You must have `Python 3` installed.
 - If you need a MongoDB IDE, install [Studio3T](https://studio3t.com/download/).
-- `Mongo Connector` requires a Mongo `Replica Set`. Install `Docker` if you'd like a local `Replica Set`.
+- `Mongo Connector` operates on a Mongo `Replica Set`. `Docker` is the easiest way to spin it up locally.
 - For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently only supports SQL API, however you'll still be able to see the internal `JSON` Document representation of other APIs.
 
 ## Local Mongo Replica Set
@@ -35,7 +35,7 @@ rs.reconfig(conf, {force:true});
 # Run locally
 `mongo-connector -c config.json`
 
-Mongo Connector's custom configuration is [specified here](https://github.com/mongodb-labs/mongo-connector/wiki/Configuration-Options). 
+`Mongo Connector`'s custom configuration is [specified here](https://github.com/mongodb-labs/mongo-connector/wiki/Configuration-Options). 
 
 Below JSON is an example config file to sync data in Graph format with Cosmos DB Emulator. Possible values for `apiType` are `SQL` (default) and `Graph`. `Graph` requires specifying `databaseId` and `collectionId`.
 
@@ -46,6 +46,7 @@ Below JSON is an example config file to sync data in Graph format with Cosmos DB
     {
       "docManager": "cosmos_doc_manager",
       "targetURL": "https://localhost:8081",
+      "bulkSize": 100,
       "args": {
         "masterKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
         "apiType": "Graph",
