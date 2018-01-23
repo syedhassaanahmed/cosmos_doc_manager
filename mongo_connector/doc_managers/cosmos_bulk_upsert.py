@@ -7,12 +7,13 @@ SPROC_BODY = """
 * by the client until total number of docs desired by the client is imported.
 * @param  {Object[]} docs - Array of documents to import.
 */
-function bulkUpsert(docs) {
+function bulkUpsert(docsObject) {
     var collection = getContext().getCollection();
     var collectionLink = collection.getSelfLink();
 
     // The count of imported docs, also used as current doc index.
     var count = 0;
+    var docs = docsObject.docs;
 
     // Validate input.
     if (!docs) throw new Error("The array is undefined or null.");

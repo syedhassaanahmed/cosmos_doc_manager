@@ -55,22 +55,18 @@ class DocManager(DocManagerBase):
             doc = self._cosmos_doc(doc, timestamp)
             self._api_handler.upsert(doc, collection_link)
 
-    @wrap_exceptions
     def update(self, document_id, update_spec, namespace, timestamp):
         pass
 
-    @wrap_exceptions
     def remove(self, document_id, namespace, timestamp):
         pass
 
-    @wrap_exceptions
     def search(self, start_ts, end_ts):
         return None
 
     def commit(self):
         pass
 
-    @wrap_exceptions
     def get_last_doc(self):
         pass
 

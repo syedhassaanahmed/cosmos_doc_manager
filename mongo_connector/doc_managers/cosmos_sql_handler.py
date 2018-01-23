@@ -6,8 +6,8 @@ from mongo_connector.doc_managers.cosmos_repository import CosmosRepository
 class SQLHandler(object):
 
     def __init__(self, url, **kwargs):
-        self.document_client = document_client.DocumentClient(url, {"masterKey": kwargs["masterKey"]})
-        self.cosmos_repository = CosmosRepository(self.document_client)
+        client = document_client.DocumentClient(url, {"masterKey": kwargs["masterKey"]})
+        self.cosmos_repository = CosmosRepository(client)
         self.offer_throughput = kwargs.get("offerThroughput", "400")
         self.metadata = {}
 
@@ -26,4 +26,4 @@ class SQLHandler(object):
         return collection_link
 
     def upsert(self, doc, collection_link):
-        self.document_client.UpsertDocument(collection_link, doc)
+        self.cosmos_repository.upsert_document(collection_link, doc)

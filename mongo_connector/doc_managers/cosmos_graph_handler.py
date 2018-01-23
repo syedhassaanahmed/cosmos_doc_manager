@@ -10,9 +10,8 @@ class GraphHandler(object):
         collection_id = kwargs["collectionId"]
         offer_throughput = kwargs.get("offerThroughput", "400")
 
-        self.document_client = document_client.DocumentClient(url, {"masterKey": kwargs["masterKey"]})
-
-        self.cosmos_repository = CosmosRepository(self.document_client)
+        client = document_client.DocumentClient(url, {"masterKey": kwargs["masterKey"]})
+        self.cosmos_repository = CosmosRepository(client)
         self.cosmos_repository.create_database(database_id)
         self.cosmos_repository.create_collection(database_id, collection_id, offer_throughput)
 
@@ -22,4 +21,4 @@ class GraphHandler(object):
         return self.collection_link
 
     def upsert(self, doc, collection_link):
-        self.document_client.UpsertDocument(collection_link, doc)
+        self.cosmos_repository.upsert_document(collection_link, doc)
