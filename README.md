@@ -50,7 +50,8 @@ Below JSON is an example config file to sync data in Graph format with Cosmos DB
         "masterKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
         "apiType": "Graph",
         "databaseId": "graphdb",
-        "collectionId": "graphcoll"
+        "collectionId": "graphcoll",
+        "offerThroughput": "1000"
       }
     }
   ]

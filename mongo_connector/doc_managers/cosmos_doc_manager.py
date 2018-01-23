@@ -51,8 +51,9 @@ class DocManager(DocManagerBase):
     @wrap_exceptions
     def bulk_upsert(self, docs, namespace, timestamp):
         collection_link = self._api_handler.create_collection_link(namespace)
-        docs = [self._cosmos_doc(doc, timestamp) for doc in docs]
-        self._api_handler.bulk_upsert(docs, collection_link)
+        for doc in docs:
+            doc = self._cosmos_doc(doc, timestamp)
+            self._api_handler.upsert(doc, collection_link)
 
     @wrap_exceptions
     def update(self, document_id, update_spec, namespace, timestamp):

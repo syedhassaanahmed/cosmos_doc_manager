@@ -8,6 +8,7 @@ class SQLHandler(object):
     def __init__(self, url, **kwargs):
         self.document_client = document_client.DocumentClient(url, {"masterKey": kwargs["masterKey"]})
         self.cosmos_repository = CosmosRepository(self.document_client)
+        self.offer_throughput = kwargs.get("offerThroughput", "400")
         self.metadata = {}
 
     def create_collection_link(self, namespace):
@@ -19,14 +20,10 @@ class SQLHandler(object):
             self.metadata[database_id] = []
 
         if collection_id not in self.metadata[database_id]:
-            self.cosmos_repository.create_collection(database_id, collection_id)
+            self.cosmos_repository.create_collection(database_id, collection_id, self.offer_throughput)
             self.metadata[database_id].append(collection_id)
 
         return collection_link
 
     def upsert(self, doc, collection_link):
         self.document_client.UpsertDocument(collection_link, doc)
-
-    def bulk_upsert(self, docs, collection_link):
-        for doc in docs:
-            self.document_client.UpsertDocument(collection_link, doc)
