@@ -11,7 +11,6 @@ class CosmosRepository(object):
         try:
             self.document_client.CreateDatabase({"id": database_id})
         except errors.HTTPFailure as e:
-
             if e.status_code != 409:
                 raise errors.HTTPFailure(e.status_code)
 

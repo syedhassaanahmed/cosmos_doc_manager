@@ -2,12 +2,10 @@ import logging
 import pydocumentdb.errors as cosmosdb_errors
 
 from mongo_connector import errors
-from mongo_connector.compat import u
 from mongo_connector.constants import (DEFAULT_COMMIT_INTERVAL, DEFAULT_MAX_BULK)
 from mongo_connector.doc_managers.cosmos_sql_handler import SQLHandler
 from mongo_connector.doc_managers.cosmos_graph_handler import GraphHandler
 from mongo_connector.doc_managers.doc_manager_base import DocManagerBase
-from mongo_connector.doc_managers.formatters import DefaultDocumentFormatter
 from mongo_connector.util import exception_wrapper
 
 wrap_exceptions = exception_wrapper({
@@ -24,36 +22,21 @@ class DocManager(DocManagerBase):
     def __init__(self, url, auto_commit_interval=DEFAULT_COMMIT_INTERVAL,
                  unique_key="_id", chunk_size=DEFAULT_MAX_BULK, **kwargs):
 
-        self.unique_key = unique_key
-        self._formatter = DefaultDocumentFormatter()
-
         if kwargs.get("apiType") == "Graph":
-            self._api_handler = GraphHandler(url, **kwargs)
+            self._api_handler = GraphHandler(url, unique_key, **kwargs)
         else:
-            self._api_handler = SQLHandler(url, **kwargs)
+            self._api_handler = SQLHandler(url, unique_key, **kwargs)
 
     def stop(self):
-        self._api_handler.document_client = None
-
-    def _cosmos_doc(self, doc, timestamp):
-        doc_id = u(doc.pop(self.unique_key))
-        doc = self._formatter.format_document(doc)
-        doc["id"] = doc_id
-        doc["_ts"] = timestamp
-        return doc
+        self._api_handler.cosmos_repository.document_client = None
 
     @wrap_exceptions
     def upsert(self, doc, namespace, timestamp):
-        collection_link = self._api_handler.create_collection_link(namespace)
-        doc = self._cosmos_doc(doc, timestamp)
-        self._api_handler.upsert(doc, collection_link)
+        self._api_handler.upsert(doc, namespace, timestamp)
 
     @wrap_exceptions
     def bulk_upsert(self, docs, namespace, timestamp):
-        collection_link = self._api_handler.create_collection_link(namespace)
-        for doc in docs:
-            doc = self._cosmos_doc(doc, timestamp)
-            self._api_handler.upsert(doc, collection_link)
+        self._api_handler.bulk_upsert(docs, namespace, timestamp)
 
     def update(self, document_id, update_spec, namespace, timestamp):
         pass
