@@ -15,7 +15,7 @@ The software in this repository is provided AS IS, with no guarantees of any kin
 ## Local Mongo Replica Set
 Run this to spin up a volume-mounted, single-node Mongo `Replica Set`;
 ```
-docker run -it --rm -p 27017:27017 -v $HOME/mongodb:/data/db mongo --replSet myreplicaset
+docker run -it --rm -p 27017:27017 -v $HOME/mongodb:/data mongo --replSet myreplicaset
 ```
 
 `Replica Set` needs to be initialized and re-configured because by default Mongo assigns container's inner address as `host`. Run this from Mongo Shell;
