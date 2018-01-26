@@ -27,7 +27,7 @@ rs.reconfig(conf, {force:true});
 ```
 
 # Installation
-- Install Mongo Connector `pip install mongo-connector`
+- Install Mongo Connector `sudo pip install mongo-connector`
 - Clone this repo `git clone https://github.com/syedhassaanahmed/cosmos_doc_manager.git`
 - Let Mongo Connector locate our Doc Manager `cd cosmos_doc_manager && export PYTHONPATH=.`
 - Disable `HTTPS` Certificate warning `export PYTHONWARNINGS="ignore:Unverified HTTPS request"`
