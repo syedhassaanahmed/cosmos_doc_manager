@@ -33,7 +33,7 @@ class SQLHandler(object):
         doc_id = u(doc.pop(self._unique_key))
         doc = self._formatter.format_document(doc)
         doc["id"] = doc_id
-        doc["_ts"] = timestamp
+        doc["_mongo_oplog_ts"] = timestamp
         return doc
 
     def upsert(self, doc, namespace, timestamp):
