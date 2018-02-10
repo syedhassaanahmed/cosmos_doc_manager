@@ -11,9 +11,9 @@ class SQLHandler(object):
         client = document_client.DocumentClient(url, {"masterKey": kwargs["masterKey"]})
         self._unique_key = unique_key
         self.cosmos_repository = CosmosRepository(client)
-        self._offer_throughput = kwargs.get("offerThroughput", "400")
         self._formatter = DefaultDocumentFormatter()
         self._metadata = {}
+        self._system_props = ["id", "_rid", "_self", "_ts", "_etag"]
 
     def _create_collection_link(self, namespace):
         database_id, collection_id = namespace.split(".", 1)
@@ -24,16 +24,22 @@ class SQLHandler(object):
             self._metadata[database_id] = []
 
         if collection_id not in self._metadata[database_id]:
-            self.cosmos_repository.create_collection(database_id, collection_id, self._offer_throughput)
+            self.cosmos_repository.create_collection(database_id, collection_id)
             self._metadata[database_id].append(collection_id)
 
         return collection_link
 
     def _cosmos_doc(self, doc, timestamp):
         doc_id = u(doc.pop(self._unique_key))
+
         doc = self._formatter.format_document(doc)
         doc["id"] = doc_id
         doc["_mongo_oplog_ts"] = timestamp
+
+        for key in self._system_props:
+            if key in doc:
+                doc[key + "_prop"] = doc.pop(key)
+
         return doc
 
     def upsert(self, doc, namespace, timestamp):

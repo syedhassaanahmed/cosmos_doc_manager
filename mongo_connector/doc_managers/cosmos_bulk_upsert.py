@@ -1,4 +1,4 @@
-SPROC_NAME="bulkupsert"
+SPROC_NAME="bulkUpsert"
 
 SPROC_BODY = """
 /**

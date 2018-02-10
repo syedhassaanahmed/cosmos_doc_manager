@@ -4,7 +4,6 @@ import pydocumentdb.errors as cosmosdb_errors
 from mongo_connector import errors
 from mongo_connector.constants import (DEFAULT_COMMIT_INTERVAL, DEFAULT_MAX_BULK)
 from mongo_connector.doc_managers.cosmos_sql_handler import SQLHandler
-from mongo_connector.doc_managers.cosmos_graph_handler import GraphHandler
 from mongo_connector.doc_managers.doc_manager_base import DocManagerBase
 from mongo_connector.util import exception_wrapper
 
@@ -22,10 +21,7 @@ class DocManager(DocManagerBase):
     def __init__(self, url, auto_commit_interval=DEFAULT_COMMIT_INTERVAL,
                  unique_key="_id", chunk_size=DEFAULT_MAX_BULK, **kwargs):
 
-        if kwargs.get("apiType") == "Graph":
-            self._api_handler = GraphHandler(url, unique_key, **kwargs)
-        else:
-            self._api_handler = SQLHandler(url, unique_key, **kwargs)
+        self._api_handler = SQLHandler(url, unique_key, **kwargs)
 
     def stop(self):
         self._api_handler.cosmos_repository.document_client = None

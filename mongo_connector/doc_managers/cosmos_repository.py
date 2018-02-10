@@ -1,4 +1,5 @@
 import mongo_connector.doc_managers.cosmos_bulk_upsert as bulk_upsert
+import mongo_connector.doc_managers.cosmos_partial_update as partial_update
 import pydocumentdb.errors as errors
 
 
@@ -14,12 +15,13 @@ class CosmosRepository(object):
             if e.status_code != 409:
                 raise errors.HTTPFailure(e.status_code)
 
-    def create_collection(self, database_id, collection_id, offer_throughput):
+    def create_collection(self, database_id, collection_id):
         database_link = "dbs/" + database_id
         collection_link = database_link + "/colls/" + collection_id
         try:
-            self.document_client.CreateCollection(database_link, {"id": collection_id},
-                                                  {"offerThroughput": offer_throughput})
+            self.document_client.CreateCollection(database_link, {"id": collection_id})
+            self.document_client.CreateStoredProcedure(collection_link,
+                                                       {"id": partial_update.SPROC_NAME, "body": partial_update.SPROC_BODY})
             self.document_client.CreateStoredProcedure(collection_link,
                                                        {"id": bulk_upsert.SPROC_NAME, "body": bulk_upsert.SPROC_BODY})
         except errors.HTTPFailure as e:

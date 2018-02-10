@@ -1,16 +1,14 @@
 # Overview
-Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cosmos DB following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way synchronization. Currently it supports Cosmos DB SQL and Graph API.
-
-**This project is currently a work-in-progress!!!**
+Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cosmos DB following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way near-realtime synchronizations. Currently it only supports Cosmos DB SQL API. In future there will be support for more APIs.
 
 # Disclaimer
-The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is **NOT associated with Microsoft**.
+The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is **NOT associated with Microsoft**. Having said that, Pull Requests are most welcome.
 
 # Prerequisites
 - You must have `Python 3` installed.
 - If you need a MongoDB IDE, install [Studio3T](https://studio3t.com/download/).
 - `Mongo Connector` operates on a Mongo `Replica Set`. `Docker` is the easiest way to spin it up locally.
-- For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently only supports SQL API, however you'll still be able to see the internal `JSON` Document representation of other APIs.
+- For local testing, install [Azure Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator). Cosmos DB Emulator currently only supports SQL API.
 
 ## Local Mongo Replica Set
 Run this to spin up a volume-mounted, single-node Mongo `Replica Set`;
@@ -37,7 +35,7 @@ rs.reconfig(conf, {force:true});
 
 `Mongo Connector`'s custom configuration is [specified here](https://github.com/mongodb-labs/mongo-connector/wiki/Configuration-Options). 
 
-Below JSON is an example config file to sync data in Graph format with Cosmos DB Emulator. Possible values for `apiType` are `SQL` (default) and `Graph`. `Graph` requires specifying `databaseId` and `collectionId`.
+Below JSON is an example config file to sync data in Graph format with Cosmos DB Emulator.
 
 ```json
 {
@@ -48,11 +46,7 @@ Below JSON is an example config file to sync data in Graph format with Cosmos DB
       "targetURL": "https://localhost:8081",
       "bulkSize": 100,
       "args": {
-        "masterKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
-        "apiType": "Graph",
-        "databaseId": "graphdb",
-        "collectionId": "graphcoll",
-        "offerThroughput": "1000"
+        "masterKey": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
       }
     }
   ]
