@@ -1,5 +1,5 @@
 # Overview
-Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cosmos DB following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for live one-way near-realtime synchronizations. Currently it only supports Cosmos DB SQL API. In future there will be support for more APIs.
+Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cosmos DB following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for near-realtime synchronizations. Currently it works for Cosmos DB SQL API. Partial MongoDB updates are handled with Stored Procedures and support the [following operations](https://github.com/syedhassaanahmed/cosmos_doc_manager/blob/10f19dace233a7e44c53a9eea3c44dcbd050f125/mongo_connector/doc_managers/cosmos_partial_update.py#L11).
 
 # Disclaimer
 The software in this repository is provided AS IS, with no guarantees of any kind. This project is an independent effort and is **NOT associated with Microsoft**. Having said that, Pull Requests are most welcome.
@@ -52,3 +52,7 @@ Below JSON is an example config file to sync data in Graph format with Cosmos DB
   ]
 }
 ```
+
+# Future improvements
+- Support for partitioned collections
+- Support for other Cosmos DB APIs

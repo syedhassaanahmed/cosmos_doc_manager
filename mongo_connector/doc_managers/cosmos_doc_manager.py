@@ -28,17 +28,17 @@ class DocManager(DocManagerBase):
 
     @wrap_exceptions
     def upsert(self, doc, namespace, timestamp):
-        self._api_handler.upsert(doc, namespace, timestamp)
+        self._api_handler.upsert(doc, namespace)
 
     @wrap_exceptions
     def bulk_upsert(self, docs, namespace, timestamp):
-        self._api_handler.bulk_upsert(docs, namespace, timestamp)
+        self._api_handler.bulk_upsert(docs, namespace)
 
     def update(self, document_id, update_spec, namespace, timestamp):
-        pass
+        self._api_handler.update(document_id, update_spec, namespace)
 
     def remove(self, document_id, namespace, timestamp):
-        pass
+        self._api_handler.remove(document_id, namespace)
 
     def search(self, start_ts, end_ts):
         return None

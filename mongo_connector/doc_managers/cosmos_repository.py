@@ -34,3 +34,10 @@ class CosmosRepository(object):
     def upsert_documents(self, collection_link, docs):
         sproc_link = collection_link + "/sprocs/" + bulk_upsert.SPROC_NAME
         self.document_client.ExecuteStoredProcedure(sproc_link, { "docs": docs })
+
+    def update_document(self, collection_link, doc_id, update_spec):
+        sproc_link = collection_link + "/sprocs/" + partial_update.SPROC_NAME
+        self.document_client.ExecuteStoredProcedure(sproc_link, [doc_id, update_spec])
+
+    def delete_document(self, collection_link, doc_id):
+        self.document_client.DeleteDocument(collection_link + "/docs/" + doc_id)
