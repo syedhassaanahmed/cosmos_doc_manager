@@ -22,9 +22,10 @@ class DocManager(DocManagerBase):
                  unique_key="_id", chunk_size=DEFAULT_MAX_BULK, **kwargs):
 
         self._api_handler = SQLHandler(url, unique_key, **kwargs)
+        self.cosmos_repository = self._api_handler.cosmos_repository
 
     def stop(self):
-        self._api_handler.cosmos_repository.document_client = None
+        self.cosmos_repository.document_client = None
 
     @wrap_exceptions
     def upsert(self, doc, namespace, timestamp):
