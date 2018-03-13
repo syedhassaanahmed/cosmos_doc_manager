@@ -41,3 +41,15 @@ class CosmosRepository(object):
 
     def delete_document(self, collection_link, doc_id):
         self.document_client.DeleteDocument(collection_link + "/docs/" + doc_id)
+
+    def get_document(self, collection_link, doc_id):
+        return self.document_client.ReadDocument(collection_link + '/docs/' + doc_id)
+
+    def delete_all(self):
+        databases = list(self.document_client.ReadDatabases())
+
+        if not databases:
+            return
+
+        for database in databases:
+            self.document_client.DeleteDatabase(database['_self'])

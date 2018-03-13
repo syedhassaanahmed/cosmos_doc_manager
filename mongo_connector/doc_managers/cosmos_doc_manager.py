@@ -35,9 +35,11 @@ class DocManager(DocManagerBase):
     def bulk_upsert(self, docs, namespace, timestamp):
         self._api_handler.bulk_upsert(docs, namespace)
 
+    @wrap_exceptions
     def update(self, document_id, update_spec, namespace, timestamp):
         self._api_handler.update(document_id, update_spec, namespace)
 
+    @wrap_exceptions
     def remove(self, document_id, namespace, timestamp):
         self._api_handler.remove(document_id, namespace)
 

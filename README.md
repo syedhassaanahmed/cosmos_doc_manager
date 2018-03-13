@@ -1,5 +1,5 @@
 # Overview
-[![PyPI](https://img.shields.io/pypi/v/cosmos-doc-manager.svg)](https://pypi.python.org/pypi/cosmos-doc-manager)
+[![PyPI version](https://badge.fury.io/py/cosmos-doc-manager.svg)](https://badge.fury.io/py/cosmos-doc-manager)
 
 Cosmos Doc Manager takes MongoDB documents and makes them available in Azure Cosmos DB following the format specified by [Mongo Connector](https://github.com/mongodb-labs/mongo-connector/wiki/Writing-Your-Own-DocManager). It piggybacks on [Mongo Replica Set Oplog](https://docs.mongodb.com/manual/core/replica-set-oplog/) and is intended for near-realtime synchronizations. Currently it works for Cosmos DB SQL API. Partial MongoDB updates are handled with Stored Procedures and support the [following operations](https://github.com/syedhassaanahmed/cosmos_doc_manager/blob/10f19dace233a7e44c53a9eea3c44dcbd050f125/mongo_connector/doc_managers/cosmos_partial_update.py#L11).
 
